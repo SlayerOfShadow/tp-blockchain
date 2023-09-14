@@ -34,13 +34,6 @@ contract CryptozombiesTest is Test {
         zombieFactory.zombies(0); // This should compile but revert because the array is empty
     }
 
-    function testLesson1Chapter7() public {
-        ZombieFactory zombieFactory = new ZombieFactory();
-        zombieFactory.createZombie("Zombie 2600", 42);
-        vm.expectRevert();
-        zombieFactory.zombies(0); // This should compile but revert because the array is empty
-    }
-
     function testLesson1Chapter8() public {
         ZombieFactory zombieFactory = new ZombieFactory();
         zombieFactory.createZombie("Zombie 2600", 42);
