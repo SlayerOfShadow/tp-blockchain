@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
-import "src/zombieattack.sol";
+import "src/zombieownership.sol";
 
 contract CryptozombiesTest is Test {
     function setUp() public {}
@@ -530,6 +530,47 @@ contract CryptozombiesTest is Test {
         (string memory name, uint newDna, , , , ) = zombieAttack.zombies(2);
         assertEq(name, "NoName");
         assertEq(newDna, (dna + enemyDna) / 2);
+    }
+
+    function testLesson5Chapter3() public {
+        ZombieOwnership zombieOwnership = new ZombieOwnership();
+
+        assertEq(zombieOwnership.balanceOf(address(this)), 0);
+
+        zombieOwnership.createRandomZombie("Zombie 2600");
+
+        assertEq(zombieOwnership.balanceOf(address(this)), 1);
+        assertEq(zombieOwnership.ownerOf(0), address(this));
+    }
+
+    function testLesson5Chapter8() public {
+        ZombieOwnership zombieOwnership = new ZombieOwnership();
+        zombieOwnership.createRandomZombie("Zombie 2600");
+
+        {
+            vm.startPrank(address(42));
+
+            vm.expectRevert();
+            zombieOwnership.approve(address(42), 0);
+
+            vm.expectRevert();
+            zombieOwnership.transferFrom(address(this), address(42), 0);
+
+            vm.stopPrank();
+        }
+
+        zombieOwnership.transferFrom(address(this), address(42), 0);
+        assertEq(zombieOwnership.balanceOf(address(this)), 0);
+        assertEq(zombieOwnership.balanceOf(address(42)), 1);
+        assertEq(zombieOwnership.ownerOf(0), address(42));
+
+        vm.prank(address(42));
+        zombieOwnership.approve(address(this), 0);
+
+        zombieOwnership.transferFrom(address(42), address(this), 0);
+        assertEq(zombieOwnership.balanceOf(address(this)), 1);
+        assertEq(zombieOwnership.balanceOf(address(42)), 0);
+        assertEq(zombieOwnership.ownerOf(0), address(this));
     }
 }
 
