@@ -95,20 +95,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-#balance {
-  padding-bottom: 20px;
-  border-bottom: solid;
-}
-#amount {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-#recipient {
-  display: flex;
-  justify-content: center;
-}
-input {
-  margin-right: 10px;
-}
