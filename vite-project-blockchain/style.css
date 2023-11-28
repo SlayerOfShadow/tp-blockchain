@@ -95,3 +95,29 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+#zombieCard {
+  margin-bottom: 16px;
+}
+
+#zombieCard, .allZombieCard {
+  border: 1px solid white;
+}
+
+.allZombieCard {
+  margin-bottom: 16px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li p {
+  margin: 0;
+}
+
+.allZombieCard {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
